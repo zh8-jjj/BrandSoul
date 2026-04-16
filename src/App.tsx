@@ -3,13 +3,15 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { questions, resultsData, Band } from './data/questions';
 import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 
+import spotifyIcon from './assets/icon/spotify.png';
+import appleIcon from './assets/icon/applemusic.png';
+import wangyiyunIcon from './assets/icon/wangyiyyun.png';
+
 // Helper to get robust image URLs
 const getImageUrl = (path: string) => {
   if (!path) return '';
-  // In Vite, public assets are served from the root (BASE_URL)
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return (baseUrl + cleanPath).replace(/\/+/g, '/');
+  // If it's already a processed asset URL (from import), return it
+  return path;
 };
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
@@ -516,9 +518,9 @@ export default function App() {
                 Listen On
               </span>
               <div className="flex items-center justify-center gap-12 mb-16">
-                <img src={getImageUrl('icon/spotify.png')} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
-                <img src={getImageUrl('icon/applemusic.png')} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
-                <img src={getImageUrl('icon/wangyiyyun.png')} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={spotifyIcon} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={appleIcon} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={wangyiyunIcon} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
               </div>
               
               <button 
