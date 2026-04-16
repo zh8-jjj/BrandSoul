@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { questions, resultsData, Band } from './data/questions';
+import { ASSETS_BASE_URL } from './constants';
 import { RotateCcw, ArrowLeft, Disc3, Play, Volume2, VolumeX, SkipBack, SkipForward, Pause } from 'lucide-react';
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
@@ -417,6 +418,7 @@ export default function App() {
                   alt="Background" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  loading="eager"
                 />
                 {/* Dark overlay for text readability */}
                 <div className="absolute inset-0 bg-black/40"></div>
@@ -476,6 +478,7 @@ export default function App() {
                       alt="Album Cover" 
                       className="absolute inset-0 w-full h-full object-cover"
                       referrerPolicy="no-referrer"
+                      loading="eager"
                     />
                     
                     {/* Subtle paper texture overlay */}
@@ -554,9 +557,9 @@ export default function App() {
                 Listen On
               </span>
               <div className="flex items-center justify-center gap-12 mb-16">
-                <img src="/icon/spotify.png" alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
-                <img src="/icon/applemusic.png" alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
-                <img src="/icon/wangyiyyun.png" alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
+                <img src={`${ASSETS_BASE_URL}/icon/spotify.png`} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
+                <img src={`${ASSETS_BASE_URL}/icon/applemusic.png`} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
+                <img src={`${ASSETS_BASE_URL}/icon/wangyiyyun.png`} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
               </div>
               
               <button 
