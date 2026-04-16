@@ -6,8 +6,11 @@ import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 // Helper to get robust image URLs
 const getImageUrl = (path: string) => {
   if (!path) return '';
-  // Simply return the path as is, assuming it's an absolute path from the public root
-  return path;
+  // In Vite, public assets are served from the root (BASE_URL)
+  // This ensures the path is always absolute to the deployment root
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return (baseUrl + cleanPath).replace(/\/+/g, '/');
 };
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
