@@ -224,8 +224,8 @@ export const resultsData = {
     track: "《十万嬉皮》",
     tracks: ["《十万嬉皮》", "《秦皇岛》", "《大石碎胸口》", "《杀死那个石家庄人》"],
     vibe: "破败工业城市里的浪漫主义，小号声中的末日狂欢。你们的灵魂底色是灰暗的华北平原，却总能在绝望的废墟中开出诗意的花。在时代洪流的裹挟下，用一种近乎悲壮的清醒，冷眼旁观着周遭的荒诞与喧嚣。",
-    coverUrl: "covers/1.jpg",
-    introImageUrl: "introduction/a.jpg",
+    coverUrl: "/covers/1.jpg",
+    introImageUrl: "/introduction/a.jpg",
     colors: "from-zinc-200 to-white",
     accent: "text-zinc-800"
   },
@@ -238,8 +238,8 @@ export const resultsData = {
     track: "《Pigs in the River》",
     tracks: ["《Pigs in the River》", "《8+18》", "《At Mosp Here》", "《Sound for Celebration》"],
     vibe: "严密、冷峻、充满建筑学美感的后朋克暗房。你们的世界是一座精密咬合的钢铁迷宫，拒绝一切多余的感伤与冗杂。在合成器与贝斯构建的绝对秩序中，隐藏着对失控的恐惧，以及对纯粹理性的极致迷恋。",
-    coverUrl: "covers/2.jpg",
-    introImageUrl: "introduction/b.jpg",
+    coverUrl: "/covers/2.jpg",
+    introImageUrl: "/introduction/b.jpg",
     colors: "from-stone-200 to-white",
     accent: "text-stone-800"
   },
@@ -252,8 +252,8 @@ export const resultsData = {
     track: "《How to Disappear Completely》",
     tracks: ["《How to Disappear Completely》", "《Creep》", "《Karma Police》", "《No Surprises》"],
     vibe: "冰冷电子仪器与脆弱人声交织的异星荒野。你们是现代社会的异乡人，游走在科技异化与人类情感的边缘。在失真的吉他与神经质的呢喃中，是对这个过度消费、信息爆炸世界的无声控诉与深深疏离。",
-    coverUrl: "covers/4.jpg",
-    introImageUrl: "introduction/d.jpg",
+    coverUrl: "/covers/4.jpg",
+    introImageUrl: "/introduction/d.jpg",
     colors: "from-slate-200 to-white",
     accent: "text-slate-800"
   },
@@ -266,8 +266,8 @@ export const resultsData = {
     track: "《Don't Delete The Kisses》",
     tracks: ["《Don't Delete The Kisses》", "《Moaning Lisa Smile》", "《Bros》", "《Silk》"],
     vibe: "裹挟着失真吉他噪音的青春期日记本。你们的情感如同过山车般剧烈起伏，在极度的狂躁与极致的温柔之间反复横跳。那些被隐藏在厚重音墙下的脆弱与敏感，是你们对抗成人世界虚伪面具的最有力武器。",
-    coverUrl: "covers/3.jpg",
-    introImageUrl: "introduction/c.jpg",
+    coverUrl: "/covers/3.jpg",
+    introImageUrl: "/introduction/c.jpg",
     colors: "from-red-100 to-white",
     accent: "text-red-800"
   },
@@ -280,8 +280,8 @@ export const resultsData = {
     track: "《Someday》",
     tracks: ["《Someday》", "《Reptilia》", "《Last Nite》", "《The Adults Are Talking》"],
     vibe: "纽约下东区凌晨三点的街头，皮夹克与漫不经心的烟圈。你们身上散发着一种毫不费力的迷人颓废感，对世俗的成功标准嗤之以鼻。在复古的吉他Riff和慵懒的嗓音里，是对“随便吧”生活哲学的完美诠释。",
-    coverUrl: "covers/7.jpg",
-    introImageUrl: "introduction/g.jpg",
+    coverUrl: "/covers/7.jpg",
+    introImageUrl: "/introduction/g.jpg",
     colors: "from-amber-100 to-white",
     accent: "text-amber-800"
   },
@@ -294,8 +294,8 @@ export const resultsData = {
     track: "《Space Song》",
     tracks: ["《Space Song》", "《Myth》", "《Lazuli》", "《Silver Soul》"],
     vibe: "沉溺在暗红色天鹅绒与迷幻合成器中的无尽夏日。你们的世界是一场永远不会醒来的梦境，充满着氤氲的雾气和模糊的光影。在缓慢流淌的旋律中，你们温柔地拒绝了现实的粗糙，建造了一座只属于自己的美学避难所。",
-    coverUrl: "covers/6.jpg",
-    introImageUrl: "introduction/f.jpg",
+    coverUrl: "/covers/6.jpg",
+    introImageUrl: "/introduction/f.jpg",
     colors: "from-purple-100 to-white",
     accent: "text-purple-800"
   },
@@ -308,8 +308,8 @@ export const resultsData = {
     track: "《Love It If We Made It》",
     tracks: ["《Love It If We Made It》", "《Somebody Else》", "《Robbers》", "《It's Not Living (If It's Not With You)》"],
     vibe: "霓虹灯闪烁的都市夜归人，充满后现代碎片感的自白。你们是信息时代的矛盾体，在极度自恋与极度自卑之间徘徊。用最流行、最合成器的外壳，包裹着对现代爱情、社交媒体和存在主义危机的深刻焦虑与戏谑。",
-    coverUrl: "covers/5.jpg",
-    introImageUrl: "introduction/e.jpg",
+    coverUrl: "/covers/5.jpg",
+    introImageUrl: "/introduction/e.jpg",
     colors: "from-pink-100 to-white",
     accent: "text-pink-800"
   }

@@ -4,7 +4,7 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [react(), tailwindcss()],
   define: {
     'process.env.GEMINI_API_KEY': JSON.stringify(process.env.GEMINI_API_KEY),

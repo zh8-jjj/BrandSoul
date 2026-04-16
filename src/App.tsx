@@ -6,14 +6,8 @@ import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 // Helper to get robust image URLs
 const getImageUrl = (path: string) => {
   if (!path) return '';
-  // If the path already has a protocol, return as is
-  if (path.startsWith('http')) return path;
-  
-  // Remove leading slash to make it relative to the current page
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  
-  // In production with base: './', this will resolve correctly relative to index.html
-  return cleanPath;
+  // Simply return the path as is, assuming it's an absolute path from the public root
+  return path;
 };
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
