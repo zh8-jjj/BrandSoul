@@ -6,11 +6,14 @@ import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 // Helper to get robust image URLs
 const getImageUrl = (path: string) => {
   if (!path) return '';
-  // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  // In Vite, public assets are served from the root (BASE_URL)
-  // This will result in "/covers/2.jpg" which is the most compatible way for root deployments
-  return `${import.meta.env.BASE_URL}${normalizedPath}`.replace(/\/+/g, '/');
+  // If the path already has a protocol, return as is
+  if (path.startsWith('http')) return path;
+  
+  // Remove leading slash to make it relative to the current page
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  
+  // In production with base: './', this will resolve correctly relative to index.html
+  return cleanPath;
 };
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
