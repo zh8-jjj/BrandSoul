@@ -3,9 +3,9 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { questions, resultsData, Band } from './data/questions';
 import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 
-import spotifyIcon from './assets/icon/spotify.png';
-import appleIcon from './assets/icon/applemusic.png';
-import wangyiyunIcon from './assets/icon/wangyiyyun.png';
+import spotifyIcon from '@/assets/icon/spotify.png';
+import appleIcon from '@/assets/icon/applemusic.png';
+import wangyiyunIcon from '@/assets/icon/wangyiyyun.png';
 
 // Helper to get robust image URLs
 const getImageUrl = (path: string) => {

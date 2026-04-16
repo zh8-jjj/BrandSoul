@@ -1,18 +1,18 @@
-import cover1 from '../assets/covers/1.jpg';
-import cover2 from '../assets/covers/2.jpg';
-import cover3 from '../assets/covers/3.jpg';
-import cover4 from '../assets/covers/4.jpg';
-import cover5 from '../assets/covers/5.jpg';
-import cover6 from '../assets/covers/6.jpg';
-import cover7 from '../assets/covers/7.jpg';
+import cover1 from '@/assets/covers/1.jpg';
+import cover2 from '@/assets/covers/2.jpg';
+import cover3 from '@/assets/covers/3.jpg';
+import cover4 from '@/assets/covers/4.jpg';
+import cover5 from '@/assets/covers/5.jpg';
+import cover6 from '@/assets/covers/6.jpg';
+import cover7 from '@/assets/covers/7.jpg';
 
-import introA from '../assets/introduction/a.jpg';
-import introB from '../assets/introduction/b.jpg';
-import introC from '../assets/introduction/c.jpg';
-import introD from '../assets/introduction/d.jpg';
-import introE from '../assets/introduction/e.jpg';
-import introF from '../assets/introduction/f.jpg';
-import introG from '../assets/introduction/g.jpg';
+import introA from '@/assets/introduction/a.jpg';
+import introB from '@/assets/introduction/b.jpg';
+import introC from '@/assets/introduction/c.jpg';
+import introD from '@/assets/introduction/d.jpg';
+import introE from '@/assets/introduction/e.jpg';
+import introF from '@/assets/introduction/f.jpg';
+import introG from '@/assets/introduction/g.jpg';
 
 export type Band = 'OmnipotentYouthSociety' | 'ReTROS' | 'Radiohead' | 'WolfAlice' | 'TheStrokes' | 'BeachHouse' | 'The1975';
 
