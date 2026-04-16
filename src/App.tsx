@@ -3,10 +3,15 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { questions, resultsData, Band } from './data/questions';
 import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
 
-// Diagnostic: Log the base URL and a sample image path to help debug Cloudflare issues
-console.log('Vite Base URL:', import.meta.env.BASE_URL);
-const samplePath = `${import.meta.env.BASE_URL}covers/1.jpg`.replace(/\/+/g, '/');
-console.log('Sample Image Resolved Path:', samplePath);
+// Helper to get robust image URLs
+const getImageUrl = (path: string) => {
+  if (!path) return '';
+  // Ensure path starts with /
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  // In Vite, public assets are served from the root (BASE_URL)
+  // This will result in "/covers/2.jpg" which is the most compatible way for root deployments
+  return `${import.meta.env.BASE_URL}${normalizedPath}`.replace(/\/+/g, '/');
+};
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
 
@@ -381,7 +386,7 @@ export default function App() {
               {/* Background Image Layer */}
               <div className="absolute inset-0 z-0">
                 <img 
-                  src={`${import.meta.env.BASE_URL}${resultsData[resultBand].introImageUrl}`.replace(/\/+/g, '/')} 
+                  src={getImageUrl(resultsData[resultBand].introImageUrl)} 
                   alt="Background" 
                   className="w-full h-full object-cover"
                   loading="eager"
@@ -441,7 +446,7 @@ export default function App() {
 
                     {/* Album Cover taking up the whole disc */}
                     <img 
-                      src={`${import.meta.env.BASE_URL}${resultsData[resultBand].coverUrl}`.replace(/\/+/g, '/')} 
+                      src={getImageUrl(resultsData[resultBand].coverUrl)} 
                       alt="Album Cover" 
                       className="absolute inset-0 w-full h-full object-cover"
                       loading="eager"
@@ -512,9 +517,9 @@ export default function App() {
                 Listen On
               </span>
               <div className="flex items-center justify-center gap-12 mb-16">
-                <img src={`${import.meta.env.BASE_URL}icon/spotify.png`.replace(/\/+/g, '/')} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
-                <img src={`${import.meta.env.BASE_URL}icon/applemusic.png`.replace(/\/+/g, '/')} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
-                <img src={`${import.meta.env.BASE_URL}icon/wangyiyyun.png`.replace(/\/+/g, '/')} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={getImageUrl('icon/spotify.png')} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={getImageUrl('icon/applemusic.png')} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={getImageUrl('icon/wangyiyyun.png')} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
               </div>
               
               <button 
