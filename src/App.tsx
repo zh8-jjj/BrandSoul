@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { questions, resultsData, Band } from './data/questions';
-import { ASSETS_BASE_URL } from './constants';
-import { RotateCcw, ArrowLeft, Disc3, Play, Volume2, VolumeX, SkipBack, SkipForward, Pause } from 'lucide-react';
+import { RotateCcw, ArrowLeft, Disc3 } from 'lucide-react';
+
+// Diagnostic: Log the base URL and a sample image path to help debug Cloudflare issues
+console.log('Vite Base URL:', import.meta.env.BASE_URL);
+const samplePath = `${import.meta.env.BASE_URL}covers/1.jpg`.replace(/\/+/g, '/');
+console.log('Sample Image Resolved Path:', samplePath);
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
 
@@ -12,45 +16,8 @@ export default function App() {
   const [answers, setAnswers] = useState<Band[]>([]);
   const [resultBand, setResultBand] = useState<Band | null>(null);
   
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-
   const { scrollY } = useScroll();
   const rotate = useTransform(scrollY, [0, 1500], [0, 360]);
-
-  useEffect(() => {
-    if (step === 'result' && resultBand) {
-      const audio = new Audio(resultsData[resultBand].audioUrl);
-      audio.volume = 0.5;
-      audio.loop = true;
-      audioRef.current = audio;
-      
-      setIsPlaying(true);
-      
-      audio.play().catch(e => {
-        console.log("Auto-play prevented by browser:", e);
-        setIsPlaying(false);
-      });
-
-      return () => {
-        audio.pause();
-        audio.currentTime = 0;
-        audioRef.current = null;
-      };
-    }
-  }, [step, resultBand]);
-
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        audioRef.current.play().catch(e => console.log(e));
-        setIsPlaying(true);
-      }
-    }
-  };
 
   const handleStart = () => {
     setStep('question');
@@ -311,7 +278,7 @@ export default function App() {
                   textShadow: '5px 5px 0px #f8f8f8, -5px -5px 0px #f8f8f8, 5px -5px 0px #f8f8f8, -5px 5px 0px #f8f8f8'
                 }}
               >
-                Brand Soul
+                Band soul
               </motion.h1>
             </div>
 
@@ -335,7 +302,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-[800px] min-h-[65vh] flex flex-col relative z-10 overflow-hidden"
+            className="w-full max-w-[1200px] min-h-[70vh] flex flex-col relative z-10 overflow-hidden"
           >
             {/* Top Bar */}
             <div className="flex justify-between items-center p-8 md:px-12 bg-bg">
@@ -358,23 +325,23 @@ export default function App() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
                 transition={{ duration: 0.4 }}
-                className="flex-1 flex flex-col p-8 md:p-16"
+                className="flex-1 flex flex-col p-6 md:px-10 md:py-12"
               >
-                <h2 className="font-serif text-3xl md:text-4xl leading-[1.5] italic mb-16 text-accent max-w-2xl">
+                <h2 className="font-serif text-3xl md:text-4xl leading-[1.5] mb-8 text-accent max-w-5xl">
                   {questions[currentQ]?.text}
                 </h2>
                 
-                <div className="flex flex-col mt-auto gap-2">
+                <div className="flex flex-col mt-auto gap-4">
                   {questions[currentQ]?.options?.map((option, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleOptionClick(option.band)}
-                      className="group flex flex-row items-center p-6 hover:bg-bg active:bg-white/20 active:shadow-[inset_0_2px_4px_0_rgba(255,255,255,0.8)] transition-all text-left rounded-lg"
+                      className="group flex flex-row items-center p-2 md:p-3 hover:bg-bg active:bg-white/20 active:shadow-[inset_0_2px_4px_0_rgba(255,255,255,0.8)] transition-all text-left rounded-lg border border-transparent hover:border-line/20"
                     >
-                      <span className="font-mono text-[12px] text-text-secondary w-12 group-hover:text-accent transition-colors">
+                      <span className="font-mono text-[12px] text-text-secondary w-12 group-hover:text-accent transition-colors shrink-0">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-serif text-[16px] md:text-[18px] leading-relaxed text-text-primary group-hover:text-accent transition-colors">
+                      <span className="font-serif text-[16px] md:text-[20px] leading-relaxed text-text-primary group-hover:text-accent transition-colors">
                         {option.text}
                       </span>
                     </button>
@@ -414,11 +381,11 @@ export default function App() {
               {/* Background Image Layer */}
               <div className="absolute inset-0 z-0">
                 <img 
-                  src={resultsData[resultBand].introImageUrl} 
+                  src={`${import.meta.env.BASE_URL}${resultsData[resultBand].introImageUrl}`.replace(/\/+/g, '/')} 
                   alt="Background" 
                   className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
                   loading="eager"
+                  onError={(e) => console.error('Failed to load background image:', e.currentTarget.src)}
                 />
                 {/* Dark overlay for text readability */}
                 <div className="absolute inset-0 bg-black/40"></div>
@@ -460,11 +427,11 @@ export default function App() {
               <div className="w-full max-w-[1080px] flex flex-col md:flex-row items-center gap-8 md:gap-16">
                 {/* Left: Spinning Disc & Controls */}
                 <div className="w-full md:w-1/2 flex flex-col items-center justify-center overflow-hidden relative">
-                <div className="relative w-full max-w-[400px] aspect-square flex items-center justify-center mb-6">
+                <div className="relative w-full max-w-[240px] aspect-square flex items-center justify-center mb-2">
                   {/* The Record */}
-                  <div 
-                    className="w-full max-w-[220px] aspect-square rounded-full bg-[#050505] flex items-center justify-center relative border-[8px] border-[#050505] ring-1 ring-white/5 overflow-hidden animate-[spin_8s_linear_infinite]"
-                    style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
+                  <motion.div 
+                    style={{ rotate }}
+                    className="w-full aspect-square rounded-full bg-[#050505] flex items-center justify-center relative border-[8px] border-[#050505] ring-1 ring-white/5 overflow-hidden"
                   >
                     {/* Realistic Vinyl Grooves on the black edge */}
                     <div className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_0_0_3px_rgba(0,0,0,0.8),inset_0_0_0_4px_rgba(255,255,255,0.02),inset_0_0_0_6px_rgba(0,0,0,0.9),inset_0_0_0_7px_rgba(255,255,255,0.03),inset_0_0_0_10px_rgba(0,0,0,0.7)] pointer-events-none z-10"></div>
@@ -474,32 +441,20 @@ export default function App() {
 
                     {/* Album Cover taking up the whole disc */}
                     <img 
-                      src={resultsData[resultBand].coverUrl} 
+                      src={`${import.meta.env.BASE_URL}${resultsData[resultBand].coverUrl}`.replace(/\/+/g, '/')} 
                       alt="Album Cover" 
                       className="absolute inset-0 w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
                       loading="eager"
+                      onError={(e) => console.error('Failed to load cover image:', e.currentTarget.src)}
                     />
+                    
+                    {/* Center Spindle Hole */}
+                    <div className="absolute w-[12px] h-[12px] bg-white rounded-full z-20 shadow-inner border border-black/10"></div>
+                    <div className="absolute w-[4px] h-[4px] bg-black/20 rounded-full z-30"></div>
                     
                     {/* Subtle paper texture overlay */}
                     <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none" style={{ filter: 'url(#paper-texture)' }}></div>
-                  </div>
-                </div>
-
-                {/* Apple Music Style Controls */}
-                <div className="flex items-center justify-center gap-8 text-text-primary -mt-4">
-                  <button className="hover:opacity-70 transition-opacity">
-                    <SkipBack size={28} fill="currentColor" />
-                  </button>
-                  <button 
-                    onClick={toggleAudio}
-                    className="w-14 h-14 flex items-center justify-center bg-text-primary text-bg rounded-full hover:scale-105 transition-transform shadow-md"
-                  >
-                    {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" className="ml-1" />}
-                  </button>
-                  <button className="hover:opacity-70 transition-opacity">
-                    <SkipForward size={28} fill="currentColor" />
-                  </button>
+                  </motion.div>
                 </div>
               </div>
 
@@ -557,9 +512,9 @@ export default function App() {
                 Listen On
               </span>
               <div className="flex items-center justify-center gap-12 mb-16">
-                <img src={`${ASSETS_BASE_URL}/icon/spotify.png`} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
-                <img src={`${ASSETS_BASE_URL}/icon/applemusic.png`} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
-                <img src={`${ASSETS_BASE_URL}/icon/wangyiyyun.png`} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" referrerPolicy="no-referrer" />
+                <img src={`${import.meta.env.BASE_URL}icon/spotify.png`.replace(/\/+/g, '/')} alt="Spotify" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={`${import.meta.env.BASE_URL}icon/applemusic.png`.replace(/\/+/g, '/')} alt="Apple Music" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                <img src={`${import.meta.env.BASE_URL}icon/wangyiyyun.png`.replace(/\/+/g, '/')} alt="Wangyiyun" className="h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
               </div>
               
               <button 
