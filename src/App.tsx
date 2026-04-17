@@ -16,6 +16,8 @@ const getImageUrl = (path: string) => {
 
 type Step = 'landing' | 'question' | 'calculating' | 'result';
 
+// Developed by BlackHouseNewSofa
+// App Version 1.0 (Asset fix synced)
 export default function App() {
   const [step, setStep] = useState<Step>('landing');
   const [currentQ, setCurrentQ] = useState(0);
